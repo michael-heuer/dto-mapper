@@ -35,7 +35,7 @@ export function buildMapper<EntityT, DtoT>(dtoClass: Class<DtoT>, ignoreNested: 
             transformer = combineTransformers<DtoT, EntityT>(transformers);
         } else if (nested && !ignoreNested) {
             const clazz = nested.accessor();
-            const builtNested = buildMapper<any, any>(clazz, true);
+            const builtNested = buildMapper<any, any>(clazz, false);
             if (nested.many) {
                 transformer = {
                     toDto: (input, s) => input == null ? input : input.map((i) => builtNested.serialize(i, s)),
